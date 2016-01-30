@@ -24,10 +24,12 @@ package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.DaoDatabase;
 import com.aoindustries.dao.Row;
+import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
-import com.aoindustries.util.AoCollections;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
 import java.util.SortedSet;
 
 /**
@@ -37,21 +39,38 @@ public class EmptyTable<
 	K extends Comparable<? super K>,
 	R extends Row<K,? extends R>
 >
-	extends AbstractTable<K,R>
+	implements Table<K,R>
 {
 
-    protected EmptyTable(Class<K> keyClass, Class<R> rowClass, DaoDatabase database) {
-        super(keyClass, rowClass, database);
+    private final DaoDatabase database;
+
+	protected EmptyTable(DaoDatabase database) {
+        this.database = database;
     }
 
     @Override
+    public DaoDatabase getDatabase() {
+        return database;
+    }
+
+	@Override
+	public Map<K, ? extends R> getMap() {
+		return Collections.emptyMap();
+	}
+
+	@Override
+	public SortedMap<K, ? extends R> getSortedMap() {
+		return Collections.emptySortedMap();
+	}
+
+	@Override
     public Set<? extends R> getUnsortedRows() {
 		return Collections.emptySet();
     }
 
     @Override
     public SortedSet<? extends R> getRows() {
-		return AoCollections.emptySortedSet();
+		return Collections.emptySortedSet();
     }
 
     @Override

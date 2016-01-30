@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2011, 2012, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,13 +23,17 @@
 package com.aoindustries.dao;
 
 import com.aoindustries.dbc.NoRowException;
+import com.aoindustries.util.WrappedException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 public interface Table<
 	K extends Comparable<? super K>,
@@ -50,7 +54,9 @@ public interface Table<
      *
      * Any overriding method should call super.clearCaches().
      */
-    void clearCaches();
+	default void clearCaches() {
+		// Do nothing
+	}
 
     /**
      * Called after the table is updated to ensure cache integrity.  Cache coherency
@@ -60,28 +66,117 @@ public interface Table<
      *
      * Any overriding method should call super.tableUpdated().
      */
-    void tableUpdated();
+	default void tableUpdated() {
+		// Do nothing
+	}
 
-    /**
-     * Gets thte number of accessible rows in this table.
+    @Override
+	default void clear() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default boolean retainAll(Collection<?> c) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default boolean removeAll(Collection<?> c) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default boolean addAll(Collection<? extends R> c) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+	default boolean containsAll(Collection<?> c) {
+        for(Object o : c) if(!contains(o)) return false;
+        return true;
+    }
+
+    @Override
+	default boolean remove(Object o) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+	default boolean add(R e) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default <T> T[] toArray(T[] a) {
+        try {
+            return getRows().toArray(a);
+        } catch(SQLException err) {
+            throw new WrappedException(err);
+        }
+    }
+
+    @Override
+	default Object[] toArray() {
+        try {
+            return getRows().toArray();
+        } catch(SQLException err) {
+            throw new WrappedException(err);
+        }
+    }
+
+    @Override
+    default boolean contains(Object o) {
+        return getMap().containsValue(o);
+    }
+
+    @Override
+    default boolean isEmpty() {
+        return size()==0;
+    }
+
+	/**
+     * Gets the number of accessible rows in this table.
      * This also provides JavaBeans-compatible size.
      */
-    int getSize() throws SQLException;
+    default int getSize() throws SQLException {
+        return getUnsortedRows().size();
+    }
 
-    /**
+    @Override
+    default int size() {
+        try {
+            return getSize();
+        } catch(SQLException err) {
+            throw new WrappedException(err);
+        }
+    }
+
+	/**
      * Iterates the rows in sorted order.
      * This also provides JavaBeans-compatible iterator.
      * 
      * @see #getRows() Different calls may return different results, for
      *                 snapshot-like behavior see getRows.
      */
-    Iterator<? extends R> getIterator() throws SQLException;
+    @SuppressWarnings("unchecked")
+    default Iterator<? extends R> getIterator() throws SQLException {
+        return getRows().iterator();
+    }
 
     /**
+     * Iterates the rows in sorted order.
+	 *
      * @see  #getIterator()
      */
     @Override
-    Iterator<R> iterator();
+	@SuppressWarnings("unchecked")
+    default Iterator<R> iterator() {
+        try {
+            return (Iterator<R>)getIterator();
+        } catch(SQLException err) {
+            throw new WrappedException(err);
+        }
+    }
     
     /**
      * Gets a map view of this table.
@@ -96,7 +191,15 @@ public interface Table<
     /**
      * Gets the table name.
      */
-    String getName();
+	default String getName() {
+		// This default implementation is based on the class simple name.
+        return getClass().getSimpleName();
+        /*
+        String name = getClass().getName();
+        int dotPos = name.lastIndexOf('.');
+        return dotPos==-1 ? name : name.substring(dotPos+1);
+         */
+	}
 
     /**
      * Gets all rows in no particular order.
@@ -122,7 +225,10 @@ public interface Table<
      * while the canonicalKey will convert to one format for matching.  Any
      * matches are performed on the canonical form the the query.
      */
-    K canonicalize(K key);
+	default K canonicalize(K key) {
+		// This default implementation returns the key unmodified.
+        return key;
+	}
 
     /**
      * Gets the row with the provided key.
@@ -145,7 +251,16 @@ public interface Table<
      * @throws NoRowException if any key is not found
      * @throws SQLException if database error occurs
      */
-    Set<? extends R> getOrderedRows(Iterable<? extends K> keys) throws NoRowException, SQLException;
+    default Set<? extends R> getOrderedRows(Iterable<? extends K> keys) throws NoRowException, SQLException {
+		// This implementation iterates through the keys calling get.
+        Iterator<? extends K> iter = keys.iterator();
+        if(!iter.hasNext()) return Collections.emptySet();
+        Set<R> results = new LinkedHashSet<>();
+        do {
+            results.add(get(iter.next()));
+        } while(iter.hasNext());
+        return Collections.unmodifiableSet(results);
+    }
 
     /**
      * Gets an unmodifiable sorted set of each object corresponding to the set of
@@ -158,5 +273,14 @@ public interface Table<
      * @throws NoRowException if any key is not found
      * @throws SQLException if database error occurs
      */
-    SortedSet<? extends R> getRows(Iterable<? extends K> keys) throws NoRowException, SQLException;
+    default SortedSet<? extends R> getRows(Iterable<? extends K> keys) throws NoRowException, SQLException {
+		// This implementation iterates through the keys calling get.
+        Iterator<? extends K> iter = keys.iterator();
+        if(!iter.hasNext()) return Collections.emptySortedSet();
+        SortedSet<R> results = new TreeSet<>();
+        do {
+            results.add(get(iter.next()));
+        } while(iter.hasNext());
+        return Collections.unmodifiableSortedSet(results);
+    }
 }

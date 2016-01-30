@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2011, 2012, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2012, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,20 +26,14 @@ import com.aoindustries.dao.DaoDatabase;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
-import com.aoindustries.util.AoCollections;
 import com.aoindustries.util.WrappedException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.SortedMap;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 abstract public class AbstractTable<
 	K extends Comparable<? super K>,
@@ -91,7 +85,7 @@ abstract public class AbstractTable<
             if(key!=null && keyClass.isInstance(key)) {
                 try {
                     R row = AbstractTable.this.get(keyClass.cast(key));
-                    if(row==null) throw new AssertionError();
+                    if(row==null) throw new AssertionError("NoRowException should have been thrown");
                     return row;
                 } catch(NoRowException err) {
                     return null;
@@ -199,121 +193,6 @@ abstract public class AbstractTable<
         return database;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * This default implementation does nothing.
-     */
-    @Override
-    public void clearCaches() {
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * This default implementation does nothing.
-     */
-    @Override
-    public void tableUpdated() {
-    }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends R> c) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        for(Object o : c) if(!map.containsValue(o)) return false;
-        return true;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean add(R e) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        try {
-            return getRows().toArray(a);
-        } catch(SQLException err) {
-            throw new WrappedException(err);
-        }
-    }
-
-    @Override
-    public Object[] toArray() {
-        try {
-            return getRows().toArray();
-        } catch(SQLException err) {
-            throw new WrappedException(err);
-        }
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return map.containsValue(o);
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size()==0;
-    }
-
-    @Override
-    public int getSize() throws SQLException {
-        return getUnsortedRows().size();
-    }
-
-    @Override
-    public int size() {
-        try {
-            return getSize();
-        } catch(SQLException err) {
-            throw new WrappedException(err);
-        }
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public Iterator<? extends R> getIterator() throws SQLException {
-        return (Iterator<R>)getRows().iterator();
-    }
-
-    /**
-     * Iterates the rows in sorted order.
-     */
-    @Override
-	@SuppressWarnings("unchecked")
-    public Iterator<R> iterator() {
-        try {
-            return (Iterator<R>)getIterator();
-        } catch(SQLException err) {
-            throw new WrappedException(err);
-        }
-    }
-
     @Override
     public Map<K,? extends R> getMap() {
         return map;
@@ -322,56 +201,5 @@ abstract public class AbstractTable<
     @Override
     public SortedMap<K,? extends R> getSortedMap() {
         return sortedMap;
-    }
-
-    /**
-     * {@inheritDoc}  This default implementation is based on the class simple name.
-     */
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
-        /*
-        String name = getClass().getName();
-        int dotPos = name.lastIndexOf('.');
-        return dotPos==-1 ? name : name.substring(dotPos+1);
-         */
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * This default implementation returns the key unmodified.
-     */
-    @Override
-    public K canonicalize(K key) {
-        return key;
-    }
-
-    /**
-     * {@inheritDoc}  This implementation iterates through the keys calling get.
-     */
-    @Override
-    public Set<? extends R> getOrderedRows(Iterable<? extends K> keys) throws NoRowException, SQLException {
-        Iterator<? extends K> iter = keys.iterator();
-        if(!iter.hasNext()) return Collections.emptySet();
-        Set<R> results = new LinkedHashSet<R>();
-        do {
-            results.add(get(iter.next()));
-        } while(iter.hasNext());
-        return Collections.unmodifiableSet(results);
-    }
-
-    /**
-     * {@inheritDoc}  This implementation iterates through the keys calling get.
-     */
-    @Override
-    public SortedSet<? extends R> getRows(Iterable<? extends K> keys) throws NoRowException, SQLException {
-        Iterator<? extends K> iter = keys.iterator();
-        if(!iter.hasNext()) return AoCollections.emptySortedSet();
-        SortedSet<R> results = new TreeSet<R>();
-        do {
-            results.add(get(iter.next()));
-        } while(iter.hasNext());
-        return Collections.unmodifiableSortedSet(results);
     }
 }
