@@ -56,7 +56,7 @@ public class EmptyTable<
     }
 
     @Override
-    public R get(K key) throws NoRowException, SQLException {
+    public R get(K key) throws NoRowException {
 		throw new NoRowException(getName()+" not found: "+key);
     }
 }
