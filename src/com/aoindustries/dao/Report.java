@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * One report generated from the underlying database.
+ * One report generated from the underlying model.
  */
 public interface Report {
 

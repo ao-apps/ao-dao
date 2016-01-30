@@ -43,9 +43,9 @@ public interface Table<
 {
 
     /**
-     * Gets the database this table is part of.
+     * Gets the model this table is part of.
      */
-    DaoDatabase getDatabase();
+    Model getModel();
 
     /**
      * Clears the caches for this table that apply to the current thread.

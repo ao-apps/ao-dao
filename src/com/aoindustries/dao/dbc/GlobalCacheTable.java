@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.DaoDatabase;
+import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dbc.NoRowException;
 import java.sql.SQLException;
@@ -61,10 +61,10 @@ abstract public class GlobalCacheTable<
 
     private final Object rowCacheLock = new Object();
     private boolean rowCacheLoaded = false;
-    private final Map<K,R> rowCache = new HashMap<K,R>();
+    private final Map<K,R> rowCache = new HashMap<>();
 
-    protected GlobalCacheTable(Class<K> keyClass, Class<R> rowClass, DaoDatabase database) {
-        super(keyClass, rowClass, database);
+    protected GlobalCacheTable(Class<K> keyClass, Class<R> rowClass, Model model) {
+        super(keyClass, rowClass, model);
     }
 
     /**

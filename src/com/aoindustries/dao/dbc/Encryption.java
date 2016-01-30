@@ -20,8 +20,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
+import com.aoindustries.security.HashedKey;
+import com.aoindustries.security.HashedPassword;
 import com.aoindustries.util.WrappedException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -53,17 +55,18 @@ public class Encryption {
      *
      * @exception  WrappedException  if any problem occurs.
 	 * 
-	 * TODO: Use salted algorithm, update database of stored passwords as passwords are validated
+	 * @deprecated  Use salted algorithm, update database of stored passwords as passwords are validated
+	 * 
+	 * @see  HashedPassword for proper password hashing
+	 * @see  HashedKey for SHA-256 hashing
      */
     public static String hash(String plaintext) throws WrappedException {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             md.update(plaintext.getBytes("UTF-8"));
             return hexEncode(md.digest());
-        } catch(NoSuchAlgorithmException err) {
-            throw new WrappedException(err);
-        } catch(UnsupportedEncodingException err) {
-            throw new WrappedException(err);
+        } catch(NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            throw new WrappedException(e);
         }
     }
 

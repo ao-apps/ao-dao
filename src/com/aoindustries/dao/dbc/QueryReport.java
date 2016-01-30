@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
 import com.aoindustries.dao.Report;
 import com.aoindustries.dbc.Database;
@@ -175,8 +175,7 @@ public abstract class QueryReport
         try {
             try {
                 beforeQuery(parameterValues, conn);
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-                try {
+                try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 					try {
 						/**
 						 * Substitute any parameters with the values provided.
@@ -195,11 +194,10 @@ public abstract class QueryReport
 						}
 
 						DatabaseConnection.setParams(conn, pstmt, sqlParams);
-						ResultSet results = pstmt.executeQuery();
-						try {
+						try (ResultSet results = pstmt.executeQuery()) {
 							ResultSetMetaData meta = results.getMetaData();
 							int numColumns = meta.getColumnCount();
-							List<QueryColumn> columns = new ArrayList<QueryColumn>();
+							List<QueryColumn> columns = new ArrayList<>();
 							for(int columnIndex=1; columnIndex<=numColumns; columnIndex++) {
 								final Alignment alignment;
 								switch(meta.getColumnType(columnIndex)) {
@@ -223,19 +221,16 @@ public abstract class QueryReport
 								}
 								columns.add(new QueryColumn(this, meta.getColumnName(columnIndex), alignment));
 							}
-							List<List<Object>> tableData = new ArrayList<List<Object>>();
+							List<List<Object>> tableData = new ArrayList<>();
 							while(results.next()) {
-								List<Object> row = new ArrayList<Object>(numColumns);
+								List<Object> row = new ArrayList<>(numColumns);
 								for(int columnIndex=1; columnIndex<=numColumns; columnIndex++) {
 									// Convert arrays to lists
 									Object value = results.getObject(columnIndex);
 									if(value instanceof Array) {
-										List<Object> values = new ArrayList<Object>();
-										ResultSet arrayResults = ((Array)value).getResultSet();
-										try {
+										List<Object> values = new ArrayList<>();
+										try (ResultSet arrayResults = ((Array)value).getResultSet()) {
 											while(arrayResults.next()) values.add(arrayResults.getObject(2));
-										} finally {
-											arrayResults.close();
 										}
 										value = AoCollections.optimalUnmodifiableList(values);
 									}
@@ -247,14 +242,10 @@ public abstract class QueryReport
 								Collections.unmodifiableList(columns),
 								Collections.unmodifiableList(tableData)
 							);
-						} finally {
-							results.close();
 						}
 					} catch(SQLException e) {
 						throw new WrappedSQLException(e, pstmt);
 					}
-				} finally {
-					pstmt.close();
 				}
             } finally {
                 afterQuery(parameterValues, conn);

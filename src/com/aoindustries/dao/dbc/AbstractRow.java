@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.DaoDatabase;
+import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 
 abstract public class AbstractRow<
@@ -32,14 +32,14 @@ abstract public class AbstractRow<
 	implements Row<K,R>
 {
 
-    private final DaoDatabase database;
+    private final Model model;
     private final Class<R> clazz;
 
     protected AbstractRow(
-        DaoDatabase database,
+        Model model,
         Class<R> clazz
     ) {
-        this.database = database;
+        this.model = model;
         this.clazz = clazz;
     }
 
@@ -60,14 +60,14 @@ abstract public class AbstractRow<
     }
 
     /**
-     * By default equality is based on same database, compatible class, and equal canonical key objects.
+     * By default equality is based on same model, compatible class, and equal canonical key objects.
      */
     @Override
     public boolean equals(Object o) {
 		if(!(o instanceof AbstractRow<?,?>)) return false;
         if(!clazz.isInstance(o)) return false;
         AbstractRow<K,? extends R> other = clazz.cast(o);
-        if(database!=other.database) return false;
+        if(model!=other.model) return false;
         K canonicalKey1 = getTable().canonicalize(getKey());
         K canonicalKey2 = other.getTable().canonicalize(other.getKey());
         return canonicalKey1.equals(canonicalKey2);
@@ -75,7 +75,7 @@ abstract public class AbstractRow<
 
     /**
      * The default ordering is based on key comparison.  If both keys
-     * are Strings, will use the database collator.
+     * are Strings, will use the model collator.
      */
     //@Override
     public int compareTo(R o) {
@@ -92,7 +92,7 @@ abstract public class AbstractRow<
         }
     }
 
-    protected DaoDatabase getDatabase() {
-        return database;
+    protected Model getDatabase() {
+        return model;
     }
 }

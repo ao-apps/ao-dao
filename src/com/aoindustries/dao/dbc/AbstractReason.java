@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
 import com.aoindustries.dao.Reason;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public abstract class AbstractReason
         if(newReason!=null) {
             int size = reasons.size();
             if(size==0) {
-                reasons = new ArrayList<AbstractReason>();
+                reasons = new ArrayList<>();
                 reasons.add(newReason);
             } else {
                 boolean needAdd = true;

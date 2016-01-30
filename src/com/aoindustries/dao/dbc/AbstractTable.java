@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.DaoDatabase;
+import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
@@ -44,7 +44,7 @@ abstract public class AbstractTable<
 
     private final Class<K> keyClass;
     private final Class<R> rowClass;
-    private final DaoDatabase database;
+    private final Model model;
 
     class TableMap implements Map<K,R> {
 
@@ -182,15 +182,15 @@ abstract public class AbstractTable<
 
     protected final SortedMap<K,R> sortedMap = new TableSortedMap();
 
-    protected AbstractTable(Class<K> keyClass, Class<R> rowClass, DaoDatabase database) {
+    protected AbstractTable(Class<K> keyClass, Class<R> rowClass, Model model) {
         this.keyClass = keyClass;
         this.rowClass = rowClass;
-        this.database = database;
+        this.model = model;
     }
 
     @Override
-    public DaoDatabase getDatabase() {
-        return database;
+    public Model getModel() {
+        return model;
     }
 
     @Override

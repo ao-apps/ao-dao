@@ -20,50 +20,35 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.Tuple2;
+import com.aoindustries.dao.TupleN;
 import java.text.Collator;
+import java.util.Arrays;
 
 /**
- * A compound key with two columns.
+ * A compound key with any number of columns of the same type.
  *
  * @author  AO Industries, Inc.
  */
-public class Tuple2Impl<
-	C1 extends Comparable<? super C1>,
-	C2 extends Comparable<? super C2>
+public class TupleNImpl<
+	C extends Comparable<? super C>
 >
-	extends AbstractTuple<Tuple2Impl<C1,C2>>
+	extends AbstractTuple<TupleNImpl<C>>
 	implements
-		Tuple2<C1,C2,Tuple2Impl<C1,C2>>,
-		Comparable<Tuple2Impl<C1,C2>>
+		TupleN<C,TupleNImpl<C>>,
+		Comparable<TupleNImpl<C>>
 {
 
-	private final C1 column1;
-	private final C2 column2;
+	private final C[] columns;
 
-	public Tuple2Impl(Collator collator, C1 column1, C2 column2) {
+	public TupleNImpl(Collator collator, C ... columns) {
 		super(collator);
-		this.column1 = column1;
-		this.column2 = column2;
+		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
     }
 
 	@Override
-	public Comparable<?>[] getColumns() {
-		return new Comparable<?>[] {
-			column1,
-			column2
-		};
-	}
-	
-	@Override
-	public C1 getColumn1() {
-		return column1;
-	}
-	
-	@Override
-	public C2 getColumn2() {
-		return column2;
+	public C[] getColumns() {
+		return Arrays.copyOf(columns, columns.length); // Defensive copy
 	}
 }

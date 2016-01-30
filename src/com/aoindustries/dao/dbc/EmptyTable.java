@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.DaoDatabase;
+import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
@@ -42,15 +42,15 @@ public class EmptyTable<
 	implements Table<K,R>
 {
 
-    private final DaoDatabase database;
+    private final Model model;
 
-	protected EmptyTable(DaoDatabase database) {
-        this.database = database;
+	protected EmptyTable(Model model) {
+        this.model = model;
     }
 
     @Override
-    public DaoDatabase getDatabase() {
-        return database;
+    public Model getModel() {
+        return model;
     }
 
 	@Override

@@ -56,7 +56,7 @@ public interface Tuple<
 
     /**
      * The default ordering is based on column value comparisons.  If both values
-     * are Strings, will use the database collator.
+     * are Strings, will use the model collator.
 	 *
 	 * If one tuple has few columns than the other, and all the values are equal,
 	 * the tuple with fewer columns is considered to be first.

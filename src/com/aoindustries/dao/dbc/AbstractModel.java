@@ -20,9 +20,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.impl;
+package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.DaoDatabase;
+import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Report;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.Database;
@@ -37,14 +37,14 @@ import java.util.Map;
 /**
  * A base implementation of <code>DaoDatabase</code>.
  */
-abstract public class AbstractDaoDatabase
-	implements DaoDatabase
+abstract public class AbstractModel
+	implements Model
 {
 
     /**
      * A single Collator for shared use.
      */
-    private static Collator collator = Collator.getInstance();
+    private static final Collator collator = Collator.getInstance();
 
     /**
      * By default, sorts in the system locale.
@@ -75,7 +75,7 @@ abstract public class AbstractDaoDatabase
      * underlying database.  This way, nothing funny will happen if master/slave databases
      * are switched mid-transaction.
      */
-    protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<Database>();
+    protected final ThreadLocal<Database> transactionDatabase = new ThreadLocal<>();
 
     protected <V> V executeTransaction(DatabaseCallable<V> callable) throws SQLException {
         Database database = transactionDatabase.get();
@@ -113,14 +113,9 @@ abstract public class AbstractDaoDatabase
 
     @Override
     public void executeTransaction(final Runnable runnable) throws SQLException {
-        executeTransaction(
-            new DatabaseRunnable() {
-                @Override
-                public void run(DatabaseConnection db) {
-                    runnable.run();
-                }
-            }
-        );
+        executeTransaction((DatabaseConnection db) -> {
+			runnable.run();
+		});
     }
 
     /**

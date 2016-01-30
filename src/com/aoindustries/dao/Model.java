@@ -27,22 +27,22 @@ import java.text.Collator;
 import java.util.Map;
 
 /**
- * A database is a collection of tables, and a collection of reports.
+ * A model is a collection of tables, and a collection of reports.
  */
-public interface DaoDatabase {
+public interface Model {
 
     /**
-     * Gets the name of this database.
+     * Gets the name of this model.
      */
     String getName();
 
     /**
-     * Gets the collator used by this database.
+     * Gets the collator used by this model.
      */
     Collator getCollator();
 
     /**
-     * Gets the set of all tables in this database.  This is a map keyed on table
+     * Gets the set of all tables in this model.  This is a map keyed on table
      * name to be useful in JSP EL without requiring a separate getter for each
      * table.
      */
@@ -54,7 +54,7 @@ public interface DaoDatabase {
     void clearAllCaches();
 
     /**
-     * Executes a transaction between any number of calls to this database and its tables.
+     * Executes a transaction between any number of calls to this model and its tables.
      */
     void executeTransaction(final Runnable runnable) throws SQLException;
 
