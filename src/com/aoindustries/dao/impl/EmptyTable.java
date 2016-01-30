@@ -26,7 +26,6 @@ import com.aoindustries.dao.DaoDatabase;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dbc.NoRowException;
 import com.aoindustries.util.AoCollections;
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Set;
 import java.util.SortedSet;
