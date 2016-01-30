@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;

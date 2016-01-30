@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2011, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -24,6 +24,7 @@ package com.aoindustries.dao;
 
 import java.sql.SQLException;
 import java.text.Collator;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -49,9 +50,11 @@ public interface Model {
     Map<String,? extends Table<?,?>> getTables();
 
     /**
-     * Clears all caches used for the current request.
+     * Clears all caches for all tables for the current thread.
      */
-    void clearAllCaches();
+    default void clearAllCaches() {
+        for(Table<?,?> table : getTables().values()) table.clearCaches();
+    }
 
     /**
      * Executes a transaction between any number of calls to this model and its tables.
@@ -61,5 +64,8 @@ public interface Model {
     /**
      * Gets the set of all reports that are supported by this repository implementation, keyed on its unique name.
      */
-    Map<String,? extends Report> getReports() throws SQLException;
+    default Map<String,? extends Report> getReports() throws SQLException {
+		// By default, there are no reports.
+        return Collections.emptyMap();
+    }
 }

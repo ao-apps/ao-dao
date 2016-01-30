@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2011, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,7 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
@@ -86,13 +86,13 @@ abstract public class AbstractRow<
             String s2 = key2.toString();
             // TODO: If both strings begin with a number, sort by that first
             // TODO: This is for lot numbers, such as 1A, 1B, 2, 3, 10, 20, 100A
-            return s1.equals(s2) ? 0 : getDatabase().getCollator().compare(s1, s2);
+            return s1.equals(s2) ? 0 : getModel().getCollator().compare(s1, s2);
         } else {
             return key1.compareTo(key2);
         }
     }
 
-    protected Model getDatabase() {
+    protected Model getModel() {
         return model;
     }
 }

@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,44 +20,41 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoindustries.dao.impl;
 
-import com.aoindustries.dao.Tuple3;
+import com.aoindustries.dao.impl.AbstractTuple;
+import com.aoindustries.dao.Tuple2;
 import java.text.Collator;
 
 /**
- * A compound key with three columns.
+ * A compound key with two columns.
  *
  * @author  AO Industries, Inc.
  */
-public class Tuple3Impl<
+public class Tuple2Impl<
 	C1 extends Comparable<? super C1>,
-	C2 extends Comparable<? super C2>,
-	C3 extends Comparable<? super C3>
+	C2 extends Comparable<? super C2>
 >
-	extends AbstractTuple<Tuple3Impl<C1,C2,C3>>
+	extends AbstractTuple<Tuple2Impl<C1,C2>>
 	implements
-		Tuple3<C1,C2,C3,Tuple3Impl<C1,C2,C3>>,
-		Comparable<Tuple3Impl<C1,C2,C3>>
+		Tuple2<C1,C2,Tuple2Impl<C1,C2>>,
+		Comparable<Tuple2Impl<C1,C2>>
 {
 
 	private final C1 column1;
 	private final C2 column2;
-	private final C3 column3;
 
-	public Tuple3Impl(Collator collator, C1 column1, C2 column2, C3 column3) {
+	public Tuple2Impl(Collator collator, C1 column1, C2 column2) {
 		super(collator);
 		this.column1 = column1;
 		this.column2 = column2;
-		this.column3 = column3;
     }
 
 	@Override
 	public Comparable<?>[] getColumns() {
 		return new Comparable<?>[] {
 			column1,
-			column2,
-			column3
+			column2
 		};
 	}
 	
@@ -69,10 +66,5 @@ public class Tuple3Impl<
 	@Override
 	public C2 getColumn2() {
 		return column2;
-	}
-	
-	@Override
-	public C3 getColumn3() {
-		return column3;
 	}
 }

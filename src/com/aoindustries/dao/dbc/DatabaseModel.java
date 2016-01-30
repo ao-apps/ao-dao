@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2011, 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,37 +22,19 @@
  */
 package com.aoindustries.dao.dbc;
 
-import com.aoindustries.dao.Model;
-import com.aoindustries.dao.Report;
-import com.aoindustries.dao.Table;
+import com.aoindustries.dao.impl.AbstractModel;
 import com.aoindustries.dbc.Database;
 import com.aoindustries.dbc.DatabaseCallable;
 import com.aoindustries.dbc.DatabaseConnection;
 import com.aoindustries.dbc.DatabaseRunnable;
 import java.sql.SQLException;
-import java.text.Collator;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * A base implementation of <code>DaoDatabase</code>.
  */
-abstract public class AbstractModel
-	implements Model
+abstract public class DatabaseModel
+	extends AbstractModel
 {
-
-    /**
-     * A single Collator for shared use.
-     */
-    private static final Collator collator = Collator.getInstance();
-
-    /**
-     * By default, sorts in the system locale.
-     */
-    @Override
-    public Collator getCollator() {
-        return collator;
-    }
 
     /**
      * Gets the underlying database that should be used at this moment in time.
@@ -61,14 +43,6 @@ abstract public class AbstractModel
      * same.
      */
     abstract protected Database getDatabase() throws SQLException;
-
-    /**
-     * Clears all caches for all tables for the current thread.
-     */
-    @Override
-    public void clearAllCaches() {
-        for(Table<?,?> table : getTables().values()) table.clearCaches();
-    }
 
     /**
      * Uses a ThreadLocal to make sure an entire transaction is executed against the same
@@ -116,13 +90,5 @@ abstract public class AbstractModel
         executeTransaction((DatabaseConnection db) -> {
 			runnable.run();
 		});
-    }
-
-    /**
-     * By default, there are no reports.
-     */
-    @Override
-    public Map<String,? extends Report> getReports() throws SQLException {
-        return Collections.emptyMap();
     }
 }

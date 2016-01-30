@@ -1,6 +1,6 @@
 /*
  * ao-dao - Simple data access objects framework.
- * Copyright (C) 2013, 2015  AO Industries, Inc.
+ * Copyright (C) 2011, 2013, 2015, 2016  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,35 +20,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with ao-dao.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aoindustries.dao.dbc;
+package com.aoindustries.dao.impl;
 
-import com.aoindustries.dao.TupleN;
+import com.aoindustries.dao.Model;
 import java.text.Collator;
-import java.util.Arrays;
 
 /**
- * A compound key with any number of columns of the same type.
- *
- * @author  AO Industries, Inc.
+ * A base implementation of <code>DaoDatabase</code>.
  */
-public class TupleNImpl<
-	C extends Comparable<? super C>
->
-	extends AbstractTuple<TupleNImpl<C>>
-	implements
-		TupleN<C,TupleNImpl<C>>,
-		Comparable<TupleNImpl<C>>
+abstract public class AbstractModel
+	implements Model
 {
 
-	private final C[] columns;
+    /**
+     * A single Collator for shared use.
+     */
+    private static final Collator collator = Collator.getInstance();
 
-	public TupleNImpl(Collator collator, C ... columns) {
-		super(collator);
-		this.columns = Arrays.copyOf(columns, columns.length); // Defensive copy
+    /**
+     * By default, sorts in the system locale.
+     */
+    @Override
+    public Collator getCollator() {
+        return collator;
     }
-
-	@Override
-	public C[] getColumns() {
-		return Arrays.copyOf(columns, columns.length); // Defensive copy
-	}
 }
