@@ -37,7 +37,7 @@ import java.util.TreeSet;
 
 public interface Table<
 	K extends Comparable<? super K>,
-	R extends Row<K,? extends R>
+	R extends Row<K,?>
 >
 	extends Collection<R>
 {

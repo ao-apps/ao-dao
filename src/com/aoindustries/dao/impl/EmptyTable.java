@@ -37,7 +37,7 @@ import java.util.SortedSet;
  */
 public class EmptyTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,? extends R>
+	R extends Row<K,?>
 >
 	implements Table<K,R>
 {

@@ -27,7 +27,7 @@ import com.aoindustries.dao.Row;
 
 abstract public class AbstractRow<
 	K extends Comparable<? super K>,
-	R extends AbstractRow<K,? extends R> & Comparable<? super R>
+	R extends AbstractRow<K,?> & Comparable<? super R>
 >
 	implements Row<K,R>
 {
@@ -66,7 +66,7 @@ abstract public class AbstractRow<
     public boolean equals(Object o) {
 		if(!(o instanceof AbstractRow<?,?>)) return false;
         if(!clazz.isInstance(o)) return false;
-        AbstractRow<K,? extends R> other = clazz.cast(o);
+        AbstractRow<K,?> other = clazz.cast(o);
         if(model!=other.model) return false;
         K canonicalKey1 = getTable().canonicalize(getKey());
         K canonicalKey2 = other.getTable().canonicalize(other.getKey());

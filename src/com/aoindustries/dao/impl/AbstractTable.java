@@ -23,10 +23,7 @@
 package com.aoindustries.dao.impl;
 
 import com.aoindustries.dao.Model;
-import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
-import com.aoindustries.dao.Row;
-import com.aoindustries.dao.Table;
 import com.aoindustries.dao.Table;
 import com.aoindustries.dbc.NoRowException;
 import com.aoindustries.util.WrappedException;
@@ -40,7 +37,7 @@ import java.util.SortedMap;
 
 abstract public class AbstractTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,? extends R>
+	R extends Row<K,?>
 >
 	implements Table<K,R>
 {

@@ -22,7 +22,6 @@
  */
 package com.aoindustries.dao.impl;
 
-import com.aoindustries.dao.impl.AbstractTable;
 import com.aoindustries.dao.Model;
 import com.aoindustries.dao.Row;
 import com.aoindustries.dbc.NoRowException;
@@ -40,7 +39,7 @@ import java.util.TreeSet;
  */
 abstract public class RowCacheTable<
 	K extends Comparable<? super K>,
-	R extends Row<K,? extends R>
+	R extends Row<K,?>
 >
 	extends AbstractTable<K,R>
 {
