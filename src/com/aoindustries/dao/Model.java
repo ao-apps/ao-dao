@@ -59,7 +59,7 @@ public interface Model {
     /**
      * Executes a transaction between any number of calls to this model and its tables.
      */
-    void executeTransaction(final Runnable runnable) throws SQLException;
+    void executeTransaction(Runnable runnable) throws SQLException;
 
     /**
      * Gets the set of all reports that are supported by this repository implementation, keyed on its unique name.
