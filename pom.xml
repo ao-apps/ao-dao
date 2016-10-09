@@ -110,8 +110,8 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 						</compilerArgs>
 						<showDeprecation>true</showDeprecation>
 						<showWarnings>true</showWarnings>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>1.8</source>
+						<target>1.8</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -163,7 +163,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 							<artifactId>maven-compiler-plugin</artifactId>
 							<configuration>
 								<compilerArguments>
-									<bootclasspath>${bootclasspath.jdk16}</bootclasspath>
+									<bootclasspath>${bootclasspath.jdk18}</bootclasspath>
 								</compilerArguments>
 							</configuration>
 						</plugin>
