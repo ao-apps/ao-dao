@@ -22,7 +22,6 @@
  */
 package com.aoindustries.dao.impl;
 
-import com.aoindustries.dao.impl.AbstractTuple;
 import com.aoindustries.dao.TupleN;
 import java.text.Collator;
 import java.util.Arrays;

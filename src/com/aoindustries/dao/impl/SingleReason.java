@@ -22,7 +22,6 @@
  */
 package com.aoindustries.dao.impl;
 
-import com.aoindustries.dao.impl.AbstractReason;
 import com.aoindustries.dao.Reason;
 import com.aoindustries.util.i18n.ThreadLocale;
 import java.text.Collator;
