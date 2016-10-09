@@ -45,6 +45,7 @@ import java.util.TreeSet;
  * TODO: Coordinate invalidation between nodes in cluster
  * TODO: Coordinate invalidation between PHP and Java
  * TODO: Once both done, more aggressively use global caches for better remote database performance
+ * TODO: Publish PHP version on PECL
  */
 abstract public class GlobalCacheTable<
 	K extends Comparable<? super K>,
