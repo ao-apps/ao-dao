@@ -167,6 +167,13 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 								</compilerArguments>
 							</configuration>
 						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-javadoc-plugin</artifactId>
+							<configuration>
+								<bootclasspath>${bootclasspath.jdk18}</bootclasspath>
+							</configuration>
+						</plugin>
 					</plugins>
 				</pluginManagement>
 			</build>
