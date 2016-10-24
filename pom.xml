@@ -40,6 +40,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		<javaVersion>1.8</javaVersion>
 		<compiler.bootclasspath>${bootclasspath.jdk18}</compiler.bootclasspath>
 		<javac.bootclasspath>${bootclasspath.jdk18}</javac.bootclasspath>
+		<javac.link.javaApi>${javac.link.javaApi.jdk18}</javac.link.javaApi>
 	</properties>
 
 	<name>AO DAO</name>
@@ -54,27 +55,6 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		<url>https://github.com/aoindustries/${project.artifactId}</url>
 		<tag>HEAD</tag>
 	</scm>
-
-	<profiles>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.4</version>
-						<configuration>
-							<links>
-								<!-- All modules are java 1.8, link added here in parent -->
-								<link>https://docs.oracle.com/javase/8/docs/api/</link>
-							</links>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 	<modules>
 		<module>ao-dao-api</module>
