@@ -41,6 +41,8 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		<compiler.bootclasspath>${bootclasspath.jdk18}</compiler.bootclasspath>
 		<javac.bootclasspath>${bootclasspath.jdk18}</javac.bootclasspath>
 		<javac.link.javaApi>${javac.link.javaApi.jdk18}</javac.link.javaApi>
+		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="${project.parent.url}">${project.parent.name}</a>
+/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 	</properties>
 
 	<name>AO DAO</name>
