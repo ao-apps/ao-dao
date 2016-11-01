@@ -7,3 +7,12 @@
 [submodule "ao-dao-dbc"]
 	path = ao-dao-dbc
 	url = git@github.com:aoindustries/ao-dao-dbc.git
+[submodule "api"]
+	path = api
+	url = git@github.com:aoindustries/ao-dao-api.git
+[submodule "base"]
+	path = base
+	url = git@github.com:aoindustries/ao-dao-base.git
+[submodule "dbc"]
+	path = dbc
+	url = git@github.com:aoindustries/ao-dao-dbc.git

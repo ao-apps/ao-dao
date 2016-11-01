@@ -59,8 +59,8 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 	</scm>
 
 	<modules>
-		<module>ao-dao-api</module>
-		<module>ao-dao-base</module>
-		<module>ao-dao-dbc</module>
+		<module>api</module>
+		<module>base</module>
+		<module>dbc</module>
 	</modules>
 </project>
