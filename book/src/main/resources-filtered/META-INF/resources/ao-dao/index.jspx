@@ -39,7 +39,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		<core:child book="/ao-dao/base" page="/index.jspx" />
 		<core:child book="/ao-dao/dbc" page="/index.jspx" />
 		<p>
-			@{description.html}
+			@{documented.description}
 		</p>
 		<section:section label="Project Links">
 			<ul>
