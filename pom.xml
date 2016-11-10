@@ -46,7 +46,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 	</properties>
 
 	<name>AO DAO</name>
-	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com/${project.artifactId}/</url>
 	<description>Parent POM for simple data access objects framework.</description>
 	<inceptionYear>2011</inceptionYear>
 
@@ -59,8 +59,12 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 	</scm>
 
 	<modules>
+		<module>book</module>
 		<module>api</module>
+		<module>api/book</module>
 		<module>base</module>
+		<module>base/book</module>
 		<module>dbc</module>
+		<module>dbc/book</module>
 	</modules>
 </project>
