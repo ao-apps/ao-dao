@@ -1,5 +1,5 @@
 # [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://aoindustries.com/) [AO DAO](https://aoindustries.com/ao-dao/)
-Parent POM for simple data access objects framework.
+Aggregator POM for simple data access objects framework.
 
 ## Project Links
 * [Project Home](https://aoindustries.com/ao-dao/)

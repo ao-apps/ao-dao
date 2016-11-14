@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ao-dao - Parent POM for simple data access objects framework.
+ao-dao - Aggregator POM for simple data access objects framework.
 Copyright (C) 2016  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
@@ -36,18 +36,9 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 	<version>1.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<properties>
-		<javaVersion>1.8</javaVersion>
-		<compiler.bootclasspath>${bootclasspath.jdk18}</compiler.bootclasspath>
-		<javac.bootclasspath>${bootclasspath.jdk18}</javac.bootclasspath>
-		<javac.link.javaApi>${javac.link.javaApi.jdk18}</javac.link.javaApi>
-		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="${project.parent.url}">${project.parent.name}</a>
-/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
-	</properties>
-
 	<name>AO DAO</name>
-	<url>https://aoindustries.com/${project.artifactId}/</url>
-	<description>Parent POM for simple data access objects framework.</description>
+	<url>https://aoindustries.com/ao-dao/</url>
+	<description>Aggregator POM for simple data access objects framework.</description>
 	<inceptionYear>2011</inceptionYear>
 
 	<scm>
