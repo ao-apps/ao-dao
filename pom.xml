@@ -33,7 +33,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 
 	<groupId>com.aoindustries</groupId>
 	<artifactId>ao-dao</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4-validation-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>AO DAO</name>
