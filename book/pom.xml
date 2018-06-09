@@ -40,7 +40,6 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		<documented.description>Aggregator POM for simple data access objects framework.</documented.description>
 		<documented.inceptionYear>2011</documented.inceptionYear>
 		<documented.scm.url>https://github.com/aoindustries/${documented.artifactId}</documented.scm.url>
-		<documented.scm.url>https://github.com/aoindustries/${documented.artifactId}</documented.scm.url>
 
 		<description.html><![CDATA[Documentation for <a target="_top" href="${documented.url}">${documented.name}</a> in <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
 	</properties>
