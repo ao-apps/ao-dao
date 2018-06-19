@@ -1,4 +1,4 @@
-# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://aoindustries.com/) [AO DAO](https://aoindustries.com/ao-dao/)
+# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://github.com/aoindustries) [AO DAO](https://github.com/aoindustries/ao-dao)
 <p>
 	<a href="https://aoindustries.com/life-cycle#project-current-stable">
 		<img src="https://aoindustries.com/ao-badges/project-current-stable.svg" alt="project: current stable" />
@@ -30,9 +30,9 @@ Aggregator POM for simple data access objects framework.
 * [GitHub](https://github.com/aoindustries/ao-dao)
 
 ## Modules
-* [AO DAO API](https://aoindustries.com/ao-dao/api/)
-* [AO DAO Base](https://aoindustries.com/ao-dao/base/)
-* [AO DAO DBC](https://aoindustries.com/ao-dao/dbc/)
+* [AO DAO API](https://github.com/aoindustries/ao-dao-api)
+* [AO DAO Base](https://github.com/aoindustries/ao-dao-base)
+* [AO DAO DBC](https://github.com/aoindustries/ao-dao-dbc)
 
 ## Contact Us
 For questions or support, please [contact us](https://aoindustries.com/contact):
