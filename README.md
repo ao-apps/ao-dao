@@ -26,7 +26,7 @@ Aggregator POM for simple data access objects framework.
 ## Project Links
 * [Project Home](https://aoindustries.com/ao-dao/)
 * [Changelog](https://aoindustries.com/ao-dao/changelog)
-* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.aoindustries%22%20AND%20a:%22ao-dao%22)
+* [Maven Central Repository](https://search.maven.org/artifact/com.aoindustries/ao-dao)
 * [GitHub](https://github.com/aoindustries/ao-dao)
 
 ## Modules
