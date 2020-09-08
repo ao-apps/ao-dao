@@ -37,7 +37,7 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:21:41-0500"
-		dateModified="2020-03-28T18:15:02-05:00"
+		dateModified="2020-09-08T07:26:48-05:00"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-dao:pom.version}" />
@@ -52,7 +52,14 @@ along with ao-dao.  If not, see <http://www.gnu.org/licenses />.
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{project.scm.url}"
-			/>
+			>
+				<ul>
+					<li>
+						Updated for compatibility and consistency with the new
+						<ao:a href="https://aoindustries.com/ao-dbc/changelog#release-notes-2.0.0">AO Database Connectivity 2.0.0</ao:a>.
+					</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
