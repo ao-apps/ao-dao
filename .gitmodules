@@ -1,12 +1,12 @@
 [submodule "api"]
 	path = api
-	url = git@github.com:aoindustries/ao-dao-api.git
+	url = git@github.com:ao-apps/ao-dao-api.git
 	branch = .
 [submodule "base"]
 	path = base
-	url = git@github.com:aoindustries/ao-dao-base.git
+	url = git@github.com:ao-apps/ao-dao-base.git
 	branch = .
 [submodule "dbc"]
 	path = dbc
-	url = git@github.com:aoindustries/ao-dao-dbc.git
+	url = git@github.com:ao-apps/ao-dao-dbc.git
 	branch = .
