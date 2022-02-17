@@ -29,7 +29,7 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
 		<relativePath>../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.aoapps</groupId><artifactId>ao-dao</artifactId><version>3.0.1</version>
+	<groupId>com.aoapps</groupId><artifactId>ao-dao</artifactId><version>3.0.1-POST-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -71,7 +71,7 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
 		<connection>scm:git:git://github.com/ao-apps/ao-dao.git</connection>
 		<developerConnection>scm:git:git@github.com:ao-apps/ao-dao.git</developerConnection>
 		<url>https://github.com/ao-apps/ao-dao</url>
-		<tag>ao-dao-3.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
