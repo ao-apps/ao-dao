@@ -32,9 +32,6 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
   <groupId>com.aoapps</groupId><artifactId>ao-dao</artifactId><version>3.0.2-POST-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <properties>
-  </properties>
-
   <name>AO DAO</name>
   <url>https://oss.aoapps.com/dao/</url>
   <description>Aggregator POM for simple data access objects framework.</description>
