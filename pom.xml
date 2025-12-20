@@ -103,13 +103,27 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
     </repository>
   </repositories>
 
+  <profiles>
+    <profile>
+      <id>javaee</id>
+      <activation>
+        <property>
+          <name>javaee.skip</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>book</module>
+        <module>api/book</module>
+        <module>base/book</module>
+        <module>dbc/book</module>
+      </modules>
+    </profile>
+  </profiles>
+
   <modules>
-    <module>book</module>
     <module>api</module>
-    <module>api/book</module>
     <module>base</module>
-    <module>base/book</module>
     <module>dbc</module>
-    <module>dbc/book</module>
   </modules>
 </project>
