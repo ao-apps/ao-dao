@@ -105,10 +105,10 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
 
   <profiles>
     <profile>
-      <id>javaee</id>
+      <id>jakartaee</id>
       <activation>
         <property>
-          <name>javaee.skip</name>
+          <name>jakartaee.skip</name>
           <value>!true</value>
         </property>
       </activation>
@@ -117,6 +117,21 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
         <module>api/book</module>
         <module>base/book</module>
         <module>dbc/book</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>javaee</id>
+      <activation>
+        <property>
+          <name>javaee.skip</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>book-javaee</module>
+        <module>api/book-javaee</module>
+        <module>base/book-javaee</module>
+        <module>dbc/book-javaee</module>
       </modules>
     </profile>
   </profiles>
