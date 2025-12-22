@@ -103,22 +103,13 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
     </repository>
   </repositories>
 
+  <modules>
+    <module>api</module>
+    <module>base</module>
+    <module>dbc</module>
+  </modules>
+
   <profiles>
-    <profile>
-      <id>jakartaee</id>
-      <activation>
-        <property>
-          <name>jakartaee.skip</name>
-          <value>!true</value>
-        </property>
-      </activation>
-      <modules>
-        <module>book</module>
-        <module>api/book</module>
-        <module>base/book</module>
-        <module>dbc/book</module>
-      </modules>
-    </profile>
     <profile>
       <id>javaee</id>
       <activation>
@@ -134,11 +125,20 @@ along with ao-dao.  If not, see <https://www.gnu.org/licenses/>.
         <module>dbc/book-javaee</module>
       </modules>
     </profile>
+    <profile>
+      <id>jakartaee</id>
+      <activation>
+        <property>
+          <name>jakartaee.skip</name>
+          <value>!true</value>
+        </property>
+      </activation>
+      <modules>
+        <module>book</module>
+        <module>api/book</module>
+        <module>base/book</module>
+        <module>dbc/book</module>
+      </modules>
+    </profile>
   </profiles>
-
-  <modules>
-    <module>api</module>
-    <module>base</module>
-    <module>dbc</module>
-  </modules>
 </project>
